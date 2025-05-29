@@ -318,7 +318,7 @@ def main(
 
             # Print GPU status
             os.system('clear')  # Clear screen on Mac/Unix systems
-            print(f"{Fore.CYAN}Refreshing GPU status... ({time.strftime('%Y-%m-%d %H:%M:%S')}){Style.RESET_ALL}")
+            print(f"Refreshing GPU status... ({time.strftime('%Y-%m-%d %H:%M:%S')})")
             print_gpu_status(all_gpu_info, only_free, brief)
             
             if not refresh:
