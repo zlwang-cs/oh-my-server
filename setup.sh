@@ -2,9 +2,9 @@
 # oh-my-server: bootstrap a fresh server with my favorite tools.
 #
 # Usage:
-#   bash new_server_setup.sh              # interactive: pick what to install
-#   bash new_server_setup.sh --all        # install everything, no questions
-#   curl -fsSL https://raw.githubusercontent.com/zlwang-cs/oh-my-server/main/new_server_setup.sh | bash
+#   bash setup.sh              # interactive: pick what to install
+#   bash setup.sh --all        # install everything, no questions
+#   curl -fsSL https://raw.githubusercontent.com/zlwang-cs/oh-my-server/main/setup.sh | bash
 set -euo pipefail
 
 # ---------------------------------------------------------------- helpers ---
@@ -192,6 +192,17 @@ install_uv() {
     fi
 }
 
+# ----------------------------------------------------------- claude code ---
+install_claude() {
+    ensure curl
+    if has claude || [ -x "$HOME/.local/bin/claude" ]; then
+        ok "claude code already installed"
+    else
+        log "installing claude code"
+        curl -fsSL https://claude.ai/install.sh | bash
+    fi
+}
+
 # ------------------------------------------------------ zsh + oh-my-zsh ---
 install_zsh() {
     ensure zsh git curl
@@ -238,7 +249,7 @@ install_zsh() {
     ' "$rc" >"$rc.tmp" && mv "$rc.tmp" "$rc"
     ok "set oh-my-zsh plugins in $rc"
 
-    # herdr and uv live in ~/.local/bin.
+    # herdr, uv and claude live in ~/.local/bin.
     append_once 'export PATH="$HOME/.local/bin:$PATH"' "$rc"
 
     # Make zsh the login shell.
@@ -270,13 +281,14 @@ install_vim() {
 
 # ------------------------------------------------------------------- menu ---
 # Order matters: zsh first so oh-my-zsh's fresh ~/.zshrc doesn't clobber
-# PATH lines that the uv/herdr installers add.
-APPS=(zsh herdr tmux uv vim)
+# PATH lines that the uv/herdr/claude installers add.
+APPS=(zsh herdr tmux uv claude vim)
 declare -A DESC=(
     [zsh]="zsh + oh-my-zsh (plugins: git, zsh-autosuggestions, zsh-syntax-highlighting, z)"
     [herdr]="herdr + config (~/.config/herdr/config.toml)"
     [tmux]="tmux + config (~/.tmux.conf)"
     [uv]="uv (Python package/project manager)"
+    [claude]="Claude Code (native installer, ~/.local/bin/claude)"
     [vim]="vim + amix/vimrc basic + cursorline + line numbers"
 )
 declare -A PICK=()
