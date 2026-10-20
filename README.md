@@ -4,11 +4,11 @@ How to quickly set up a new server
 ## Quick start
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/zlwang-cs/oh-my-server/main/setup.sh | bash
+curl -fsSL https://raw.githubusercontent.com/zlwang-cs/oh-my-server/main/new_server_setup.sh | bash
 # or, non-interactive: ... | bash -s -- --all
 ```
 
-`setup.sh` asks which apps to install, then installs each one together with its config:
+`new_server_setup.sh` asks which apps to install, then installs each one together with its config:
 
 | App   | What you get |
 |-------|--------------|

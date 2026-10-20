@@ -2,9 +2,9 @@
 # oh-my-server: bootstrap a fresh server with my favorite tools.
 #
 # Usage:
-#   bash setup.sh              # interactive: pick what to install
-#   bash setup.sh --all        # install everything, no questions
-#   curl -fsSL https://raw.githubusercontent.com/zlwang-cs/oh-my-server/main/setup.sh | bash
+#   bash new_server_setup.sh              # interactive: pick what to install
+#   bash new_server_setup.sh --all        # install everything, no questions
+#   curl -fsSL https://raw.githubusercontent.com/zlwang-cs/oh-my-server/main/new_server_setup.sh | bash
 set -euo pipefail
 
 # ---------------------------------------------------------------- helpers ---
